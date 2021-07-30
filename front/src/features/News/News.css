@@ -1,0 +1,10 @@
+.news {
+    width: 100%;
+    max-width: 250px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    margin: 20px 5px;
+    padding: 10px;
+}
+.news-title {
+    margin-bottom: 10px;
+}

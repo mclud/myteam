@@ -1,0 +1,14 @@
+.form-user {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    max-width: 450px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid grey;
+    border-radius: 7px;
+    margin-top: 25px;
+}
+#form-user > div {
+    margin-bottom: 10px;
+}

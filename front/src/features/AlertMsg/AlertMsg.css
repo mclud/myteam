@@ -1,0 +1,17 @@
+.alertmsg {
+    padding: 15px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.alertmsg-invalid {
+    background: rgb(255, 0, 0, 0.2);
+    color: #ff0000;
+    border-color: #ff0000;
+}
+.alertmsg-valid {
+    background: rgb(0, 128, 0, 0.2);
+    border-color: #008000;
+    color: #008000;
+}
