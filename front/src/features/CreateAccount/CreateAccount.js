@@ -104,8 +104,6 @@ export default function CreateAccount() {
                         setTimeout(() => dispatch(origin()), 3000);
                 }
             }
-
-            console.log()
         } 
     }
 

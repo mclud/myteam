@@ -1,29 +1,19 @@
 var express = require('express');
-const { body } = require('express-validator');
 var router = express.Router();
-var port = 5000; 
+
 var mongoose = require('mongoose'); 
-const { createUser, userLogin } = require('../Controllers/User/User');
-const session = require('express-session');
-const MongoDBSession = require('connect-mongodb-session')(session);
+const { createUser, userLogin, tryToken, killSession } = require('../Controllers/User/User');
 
 //DB PARAMS
 var options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }
-var urlmongo = "mongodb+srv://ludo:testwebdb@clusterludo.by2wl.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
+const urlmongo = "mongodb+srv://ludo:testwebdb@clusterludo.by2wl.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 //connection to DB
 mongoose.connect(urlmongo, options);
 var db = mongoose.connection; 
-
-exports.store = new MongoDBSession({
-  mongooseConnection : mongoose.connection,
-  collection:  "sessions",
-  mongoose_connection : db,
-});
 
 //DB CONNECTION HANDLERS
 db.on('error', console.error.bind(console, 'échec de la connection.')); 
@@ -31,12 +21,22 @@ db.once('open', function (){
     console.log("Connexion réussie."); 
 }); 
 
+router.get("/", (req, res) => {
+  res.send({ response: "I am alive" }).status(200);
+});
+
 //inscription
 router.route('/join')
   .post(createUser);
 
 router.route('/login')
   .post(userLogin);
+
+router.route('/cookie')
+  .get(tryToken);
+
+router.route('/logout')
+  .get(killSession);
 
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

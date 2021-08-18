@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { valid, invalid, origin } from '../AlertMsg/AlertMsgSlice';
 import { logged } from '../AppWraper/AppWraperSlice';
 import { useHistory } from "react-router-dom";
+import { saniMail, saniPwd } from '../Security/Cookie';
 
 
 
@@ -40,29 +41,6 @@ export default function Login() {
         errorTxt : "",
         val : ""
     });
-    const [ password2 , setPassword2 ] = useState({
-        error : false,
-        errorTxt : "",
-        val : ""
-    });
-
-    let checkMail = (e) => {
-        //sanitize input
-        let validMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        let value = e.target.value.toString();
-        if (validMail.test(value)) setMail({error : false, errorTxt : "", val : value}); 
-        else setMail({error : true, errorTxt : "Not a valid email", val : value});
-    }
-
-    let checkPwd = (e) => {
-        let value = e.target.value.toString();
-        if (value.length > 6) {
-            if (value === "test") setPassword({error : true, errorTxt : "Username should have more than 4 chars", val : value})
-            else setPassword({error : false, errorTxt : "", val : value});
-        } 
-        else setPassword({error : true, errorTxt : "Username should have more than 4 chars", val : value})
-    }
-
 
     //Sending data to API
     let sendForm = async function() {
@@ -87,9 +65,12 @@ export default function Login() {
     
                     //Dispatch a valid msg && fade it after 2500ms
                     dispatch(valid({msg : res.data.msg}));
-                    dispatch(logged());
-                    history.push('/');
-                    setTimeout(() => dispatch(origin()), 3000);
+
+                    dispatch(logged({user: res.data.user}));
+                    history.replace('/');
+                    setTimeout(() => {
+                        dispatch(origin());
+                    }, 3000);
                 } else {
                     let errorMsg = "Problème d'identifiant / mot de passe. Veuillez vérifier vos informations";
                     switch (res.data.error) {
@@ -113,8 +94,8 @@ export default function Login() {
 
     return(
         <div className="form-user">
-            <TextField inputProps={{pattern : "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"}} className={classes.root} helperText={mail.errorTxt} error={mail.error} id="email" value={mail.val} label="Adresse E-mail" variant="outlined" onChange={e => checkMail(e)}>Adresse e-mail</TextField>
-            <TextField className={classes.root} type="password" helperText={password.errorTxt} error={password.error} id="pwd" label="Password" value={password.val} variant="outlined" onChange={e => checkPwd(e)} >Password</TextField>
+            <TextField inputProps={{pattern : "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"}} className={classes.root} helperText={mail.errorTxt} error={mail.error} id="email" value={mail.val} label="Adresse E-mail" variant="outlined" onChange={e => setMail(saniMail(e))}>Adresse e-mail</TextField>
+            <TextField className={classes.root} type="password" helperText={password.errorTxt} error={password.error} id="pwd" label="Password" value={password.val} variant="outlined" onChange={e => setPassword(saniPwd(e))} >Password</TextField>
             <Button className={classes.btn}variant="contained" color="primary" onClick={sendForm}>Se connecter</Button>
         </div>
     )

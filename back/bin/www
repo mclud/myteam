@@ -13,19 +13,30 @@ var http = require('http');
  */
 
 var port = '5000';
-app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+ const server = http.createServer(app);
+ const io = require("socket.io")(server, 
+  { 
+  cors: {    
+    origin: "*",    
+    methods: ["GET", "POST"]  
+  }});
+ 
+ io.on("connection", (socket) => {
+   socket.emit("FromAPI", {msg : "User Connected"});
+ });
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port,8080, () => {
+  console.log('listening on port :', port);
+});
 server.on('error', onError);
 server.on('listening', onListening);
 

@@ -1,43 +1,44 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
-var helmet = require('helmet');
-var corsOptions = {
+const createError = require('http-errors');
+const path = require('path');
+const logger = require('morgan');
+const cors = require('cors');
+const helmet = require('helmet');
+const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
   exposedHeaders: ["set-cookie"],
   SameSite: "Lax",
 }
 const session = require('express-session');
-const { store } = require('./routes/index');
-var indexRouter = require('./routes/index');
+const MongoStore = require('connect-mongo');
+const indexRouter = require('./routes/index');
 
-var app = express();
+const express = require('express');
+const app = express();
+
 app.use(cors(corsOptions));
 app.use(helmet());
 app.disable('x-powered-by');
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //cookie cookie
+const oneDay = 1000 * 60 * 60 * 24;
 app.use(session({
   secret : "Bonjour ici le cookie à votre dispo",
   resave : false,
   saveUninitialized : false,
-  store: store,
-  cookie: {httpOnly: false, secure: false}
-}));
+  store: MongoStore.create({
+    mongoUrl: 'mongodb+srv://ludo:testwebdb@clusterludo.by2wl.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  }),
+  cookie: {
+    maxAge : oneDay,
+    secure: false,
+    httpOnly : false,}
+  }
+));
 
 app.use('/', indexRouter);
 
@@ -56,5 +57,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

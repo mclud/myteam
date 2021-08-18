@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const { db } = require('../../models/User');
 const User = require('../../models/User');
 
 const normalizeUserId = async (email) => {
@@ -54,8 +55,6 @@ exports.createUser = async (req, res) => {
 
 exports.userLogin = async (req, res) => {
   req.session.isAuth = false;
-  console.log(req.sessionID);
-  console.log(req.session);
   let user = await User.findOne({userMail : req.body.email}, (err, user) => {
     if (err) return {error: "Aucun compte associé à cette adresse."}
     else return {status : "ok","user" : user}
@@ -64,10 +63,35 @@ exports.userLogin = async (req, res) => {
     //now salty pwd
     let comparePwd = await bcrypt.compare(req.body.pwd, user.userPassword);
     if (comparePwd) {
-      
+      req.session.isAuth = true;
+      req.session.user = user;
       res.json({msg: "Connected", user: user, cookie: req.sessionID});
     } else res.json({error:'wrongPwd'});
   } else {
     res.json({error:'noUser'});
+  }
+}
+
+exports.tryToken = async (req, res) => {
+  if (req.session.user !== undefined) {
+    let userX = await User.find({_id : req.session.user._id}, (err, user) => {
+      if (err) return {error: "Aucun compte associé à cette adresse."}
+      else return {status : "ok","user" : user};
+    });
+    if (userX) {
+      res.json({status: "logged", user : userX});
+    } else {
+      res.json({error: "token fail"})
+    }
+  } else {
+    res.status(400);
+    res.json({error: 'no cookie'});
+  }
+}
+
+exports.killSession = async (req, res) => {
+  if (req.session) {
+    req.session.destroy();
+    res.json({logged : false, user : []});
   }
 }
