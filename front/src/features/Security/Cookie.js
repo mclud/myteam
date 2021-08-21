@@ -5,7 +5,7 @@ let cookieCheck = true;
 export const getCookie = async () => {
     if (cookieCheck) {
         cookieCheck = false;
-        let response = await fetch('http://localhost:5000/cookie', {
+        let response = await fetch(process.env.REACT_APP_API_URL + '/cookie', {
             credentials : "include",
         }).then(res => res.json())
         
@@ -21,7 +21,7 @@ export const getCookie = async () => {
 }
 
 export const logOut = async () => {
-    let response = await fetch('http://localhost:5000/logout', {
+    let response = await fetch(process.env.REACT_APP_API_URL + '/logout', {
         method: 'GET',
         credentials : "include"
     }).then(res => res);

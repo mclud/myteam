@@ -1,10 +1,11 @@
+require('dotenv').config();
 const createError = require('http-errors');
 const path = require('path');
 const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: process.env.CORS_ORIGIN,
   credentials: true,
   exposedHeaders: ["set-cookie"],
   SameSite: "Lax",
@@ -31,7 +32,7 @@ app.use(session({
   resave : false,
   saveUninitialized : false,
   store: MongoStore.create({
-    mongoUrl: 'mongodb+srv://ludo:testwebdb@clusterludo.by2wl.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    mongoUrl: process.env.DB_URL,
   }),
   cookie: {
     maxAge : oneDay,

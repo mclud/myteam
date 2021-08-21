@@ -52,7 +52,7 @@ export default function Login() {
             };
             let res = await axios({
                 method : "POST", 
-                url : 'http://localhost:5000/login',
+                url : process.env.REACT_APP_API_URL + '/login',
                 data : dataToSend,
                 withCredentials: true,
             })

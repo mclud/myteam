@@ -16,7 +16,7 @@ import NavLayer from "../NavLayer/NavLayer";
 import { bindActionCreators } from "redux";
 import history from "../History/History";
 
-const socket = io.connect('localhost:5000');
+const socket = io.connect(process.env.REACT_APP_API_URL);
 
 const useStyles = makeStyles((theme) => ({
     root: {

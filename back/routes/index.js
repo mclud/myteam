@@ -9,7 +9,7 @@ var options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }
-const urlmongo = "mongodb+srv://ludo:testwebdb@clusterludo.by2wl.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const urlmongo = process.env.DB_URL
 
 //connection to DB
 mongoose.connect(urlmongo, options);

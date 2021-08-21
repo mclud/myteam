@@ -78,7 +78,7 @@ export default function CreateAccount() {
         };
         let res = await axios({
             method : "POST", 
-            url : 'http://localhost:5000/join',
+            url : process.env.REACT_APP_API_URL + '/join',
             data : dataToSend,
         })
 
