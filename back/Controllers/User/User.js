@@ -65,6 +65,7 @@ exports.userLogin = async (req, res) => {
     if (comparePwd) {
       req.session.isAuth = true;
       req.session.user = user;
+      console.log('SESSION: ', req.session, req.sessionID);
       res.json({msg: "Connected", user: user, cookie: req.sessionID});
     } else res.json({error:'wrongPwd'});
   } else {
@@ -85,6 +86,7 @@ exports.tryToken = async (req, res) => {
       res.json({error: "token fail"})
     }
   } else {
+    req.isAuth = false;
     res.status(400);
     res.json({error: 'no cookie'});
   }

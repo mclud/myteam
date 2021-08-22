@@ -12,7 +12,6 @@ import { useHistory } from 'react-router';
 export default function CreateAccount() {
     const history = useHistory();
     const dispatch = useDispatch();
-
     const [ username, setUsername ] = useState({
         error : false,
         errorTxt : "",
@@ -89,7 +88,7 @@ export default function CreateAccount() {
                 setPassword({val: ""});
                 setUsername({val : ""});
                 setMail({val : ""});
-
+                history.replace('/login');
                 //Dispatch a valid msg && fade it after 2500ms
                 history.push('/login');
                 dispatch(valid({msg : res.data.msg}));

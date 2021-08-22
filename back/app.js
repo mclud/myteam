@@ -9,9 +9,10 @@ const helmet = require('helmet');
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
-  exposedHeaders: ["set-cookie"],
-  SameSite: "Lax",
+  // exposedHeaders: ["set-cookie"],
+  // SameSite: "Lax",
 }
+
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const indexRouter = require('./routes/index');

@@ -21,7 +21,7 @@ db.once('open', function (){
     console.log("Connexion réussie."); 
 }); 
 
-router.get("/", (req, res) => {
+router.get("/api", (req, res) => {
   res.send({ response: "I am alive" }).status(200);
 });
 
