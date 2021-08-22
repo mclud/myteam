@@ -15,6 +15,7 @@ import NavBar from "../NavBar/NavBar";
 import NavLayer from "../NavLayer/NavLayer";
 import { bindActionCreators } from "redux";
 import history from "../History/History";
+import HomeSlider from "../HomeSlider/HomeSlider";
 
 const socket = io.connect(process.env.REACT_APP_API_URL);
 
@@ -30,9 +31,15 @@ const useStyles = makeStyles((theme) => ({
       margin: "auto",
       display: 'flex!important',
       flexDirection : 'column',
+      color: 'white',
+    },
+    appBg : {
+        backgroundColor: '#222629'
     },
     waitMsg: {
-
+        fontFamily: 'Duck',
+        fontSize: '2rem',
+        letterSpacing : '4px',
     },
     bar: {
         width: '100%',
@@ -87,16 +94,19 @@ export function AppWraper() {
         <Router history={history}>
         <div className="appWrap">
         {isAuth === undefined ?
-            <div className={classes.root}>
-                <LinearProgress className={classes.bar}/>
-                <div className={classes.waitMsg}>BUILDING APP....</div>
-                <LinearProgress className={classes.bar} color="secondary" />
+            <div className={classes.appBg}>
+                <div className={classes.root}>
+                    <LinearProgress className={classes.bar}/>
+                    <div className={classes.waitMsg}>BUILDING APP....</div>
+                    <LinearProgress className={classes.bar} color="secondary" />
+                </div>
             </div>
             : 
             <div>
             <NavBar />
             <NavLayer />
             <AlertMsg></AlertMsg> 
+            <HomeSlider />
             <Switch>
                 <Route exact path="/">
                 <Grid>

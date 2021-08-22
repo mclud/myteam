@@ -75,13 +75,13 @@ export default function Login() {
                     let errorMsg = "Problème d'identifiant / mot de passe. Veuillez vérifier vos informations";
                     switch (res.data.error) {
                         case "noUser": 
-                            dispatch(invalid({msg: "Problème d'identifiant / mot de passe. Veuillez vérifier vos informations"}));
+                            dispatch(invalid({msg: errorMsg}));
                             setTimeout(() => dispatch(origin()), 3000);
                             break;
                         case 'wrongPwd':
                             dispatch(invalid({msg: errorMsg}))
                         default:
-                            dispatch(invalid({msg: "Default msg"}));
+                            dispatch(invalid({msg: errorMsg}));
                             setTimeout(() => dispatch(origin()), 3000);
                     }
                 }

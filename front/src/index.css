@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "Duck";
+  src: local("Duck"),
+   url("./fonts/duck/Ducks.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "coolvetica";
+    src: local("coolvetica"),
+     url("./fonts/coolvetica/coolvetica.ttf") format("truetype");
+    }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

@@ -23,13 +23,21 @@ export function NavBar(props) {
     const useStyles = makeStyles((theme) => ({
         root: {
           flexGrow: 1,
+          backgroundColor: "black!important",
+          justifyContent: 'center',
         },
         menuButton: {
           marginRight: theme.spacing(2),
         },
         title: {
           flexGrow: 1,
+          textAlign: 'center',
+          fontFamily: 'Duck',
+          fontSize: '2.5rem',
         },
+        appBar : {
+          backgroundColor: "#222629",
+        }
       }));
 
     const classes = useStyles();
@@ -67,7 +75,7 @@ export function NavBar(props) {
     
     return(
         <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.appBar}>
           <Toolbar>
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleMenu}>
               <MenuIcon />

@@ -7,6 +7,16 @@
   pointer-events: none;
 }
 
+.dk-font {
+  font-family: 'Duck'!important;
+  font-size: 2.8rem!important;
+}
+
+.cool-font {
+  font-family: 'coolvetica';
+  font-size: 2rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

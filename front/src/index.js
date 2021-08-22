@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './fonts/duck/Ducks.ttf';
+import './fonts/coolvetica/coolvetica.ttf';
 
 ReactDOM.render(
   <React.Fragment>
