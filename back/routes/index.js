@@ -21,21 +21,21 @@ db.once('open', function (){
     console.log("Connexion réussie."); 
 }); 
 
-router.get("/", (req, res) => {
+router.get("/api", (req, res) => {
   res.send({ response: "I am alive" }).status(200);
 });
 
 //inscription
-router.route('/join')
+router.route('/api/join')
   .post(createUser);
 
-router.route('/login')
+router.route('/api/login')
   .post(userLogin);
 
-router.route('/cookie')
+router.route('/api/cookie')
   .get(tryToken);
 
-router.route('/logout')
+router.route('/api/logout')
   .get(killSession);
 
 router.use(function(req, res, next) {

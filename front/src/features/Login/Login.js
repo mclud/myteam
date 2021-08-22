@@ -54,7 +54,7 @@ export default function Login() {
                 method : "POST", 
                 url : process.env.REACT_APP_API_URL + '/login',
                 data : dataToSend,
-                withCredentials: true,
+                withCredentials:  "true",
             })
     
             if (res.status === 200) {
