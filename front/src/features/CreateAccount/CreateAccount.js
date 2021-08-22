@@ -6,10 +6,11 @@ import { valid, invalid, origin } from "../AlertMsg/AlertMsgSlice";
 import { logged } from '../AppWraper/AppWraperSlice';
 import axios from "axios";
 import './CreateAccount.css';
+import { useHistory } from 'react-router';
 
 
 export default function CreateAccount() {
-
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const [ username, setUsername ] = useState({
@@ -90,6 +91,7 @@ export default function CreateAccount() {
                 setMail({val : ""});
 
                 //Dispatch a valid msg && fade it after 2500ms
+                history.push('/login');
                 dispatch(valid({msg : res.data.msg}));
                 setTimeout(() => dispatch(origin()), 3000);
             } else {

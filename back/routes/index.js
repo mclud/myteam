@@ -26,16 +26,16 @@ router.get("/", (req, res) => {
 });
 
 //inscription
-router.route('/join')
+router.route('/api/join')
   .post(createUser);
 
-router.route('/login')
+router.route('/api/login')
   .post(userLogin);
 
-router.route('/cookie')
+router.route('/api/cookie')
   .get(tryToken);
 
-router.route('/logout')
+router.route('/api/logout')
   .get(killSession);
 
 router.use(function(req, res, next) {

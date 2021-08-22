@@ -73,6 +73,7 @@ exports.userLogin = async (req, res) => {
 }
 
 exports.tryToken = async (req, res) => {
+  console.log('try to get cookie');
   if (req.session.user !== undefined) {
     let userX = await User.find({_id : req.session.user._id}, (err, user) => {
       if (err) return {error: "Aucun compte associé à cette adresse."}
