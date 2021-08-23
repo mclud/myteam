@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 
+console.log('here');
+
 var app = require('../app');
 var debug = require('debug')('api:server');
 var http = require('http');
@@ -18,27 +20,33 @@ var port = process.env.PORT || '5000';
  * Create HTTP server.
  */
 
- const server = http.createServer(app);
- const io = require("socket.io")(server, 
-  { 
-  cors: {    
-    origin: "*",    
-    methods: ["GET", "POST"]  
-  }});
- 
- io.on("connection", (socket) => {
-   socket.emit("FromAPI", {msg : "User Connected"});
- });
+const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port,8080, () => {
-  console.log('listening on port :', port);
+  console.log('listening on pogfhfghrt :', port);
 });
-server.on('error', onError);
-server.on('listening', onListening);
+
+const io = require("socket.io")(
+  server, 
+  { 
+  cors: {    
+    origin: "http://localhost:3000",    
+    methods: ["GET", "POST"],
+    allowedHeaders: ["ioteam"],
+  }}
+  );
+ 
+ io.on("connect_error", (err) => {
+  console.log(`connect_error due to ${err.message}`);
+
+ io.on('userConnected', (socket) => {
+   socket.emit('userON', {msg: "Utilisateur connecté"});
+ })
+});
 
 /**
  * Normalize a port into a number, string, or false.

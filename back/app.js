@@ -7,10 +7,7 @@ const helmet = require('helmet');
 
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
   credentials: true,
-  // exposedHeaders: ["set-cookie"],
-  // SameSite: "Lax",
 }
 
 const session = require('express-session');
@@ -20,31 +17,37 @@ const indexRouter = require('./routes/index');
 const express = require('express');
 const app = express();
 
+app.use(function(req, res, next) {
+  res.set('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+// var allowedOrigins = ['http://localhost:3000',
+//                       'https://localhost:3000',
+//                       'http://185.98.137.145',
+//                       'https://185.98.137.145',
+//                       'http://www.1shot.fr',
+//                       'https://www.1shot.fr',
+//                       'http://1shot.fr',
+//                       'https://1shot.fr',
+//                     ];
+
+// app.use(cors({
+//   origin: function(origin, callback){
+//     // allow requests with no origin
+//     // (like mobile apps or curl requests)
+//     if(!origin)
+//       return callback(null, true);
+//     if(allowedOrigins.indexOf(origin) === -1){
+//       var msg = 'The CORS policy for this site does not ' +
+//           'allow access from the specified Origin.';
+//       return callback(new Error(msg), false);
+//     }
+//     return callback(null, true);
+//   }
+// }));
+
 app.use(cors(corsOptions));
-
-
-/* prod cors fix
-
-var allowedOrigins = ['http://localhost:3000',
-                      'http://185.98.137.145',
-                      'http://www.1shot.fr'];
-
-app.use(cors({
-  origin: function(origin, callback){
-    // allow requests with no origin
-    // (like mobile apps or curl requests)
-    if(!origin)
-      return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      var msg = 'The CORS policy for this site does not ' +
-          'allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-}));
-
-*/
 
 app.use(helmet());
 app.disable('x-powered-by');
@@ -69,6 +72,7 @@ app.use(session({
   }
 ));
 
+
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
@@ -78,6 +82,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  console.log('HERE');
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -86,7 +91,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 module.exports = app;

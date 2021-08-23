@@ -17,7 +17,12 @@ import { bindActionCreators } from "redux";
 import history from "../History/History";
 import HomeSlider from "../HomeSlider/HomeSlider";
 
-const socket = io.connect(process.env.REACT_APP_API_URL);
+const socket = io('localhost:5000', {
+    widthCredentials: true,
+    extraHeader: {
+        "ioteam": 'myTeamIO',
+    }
+});
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,7 +64,7 @@ export function AppWraper() {
 
     useEffect(() => {
         if (toggleMenu !== store.getState().navlayer.open) setToggleMenu(store.getState().navlayer.open);
-        console.log('toggle menu is :', toggleMenu)
+
         // //Is auth ?
         let cookie = new Promise(async (res, rej) => {
             if (!cookieCheck) {
@@ -84,8 +89,15 @@ export function AppWraper() {
 
         //io
         socket.on('FromAPI', (res) => {
+            console.log('USER CONNECTTTTTED');
+            socket.emit('userConnected', {data: ""});
             setResponse(res.test)
-        })
+        });
+
+        socket.on('hello', (res) => {
+            console.log('hello retour');
+            console.log(res);
+        });
     });
 
     const classes = useStyles();

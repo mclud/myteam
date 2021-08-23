@@ -54,7 +54,11 @@ exports.createUser = async (req, res) => {
 }
 
 exports.userLogin = async (req, res) => {
+
+  res.set('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Credentials', true);
   req.session.isAuth = false;
+  // console.log(req);
   let user = await User.findOne({userMail : req.body.email}, (err, user) => {
     if (err) return {error: "Aucun compte associé à cette adresse."}
     else return {status : "ok","user" : user}
@@ -74,11 +78,19 @@ exports.userLogin = async (req, res) => {
 }
 
 exports.tryToken = async (req, res) => {
-  console.log('try to get cookie');
+  res.set('Access-Control-Allow-Origin', req.headers.origin);
   if (req.session.user !== undefined) {
     let userX = await User.find({_id : req.session.user._id}, (err, user) => {
-      if (err) return {error: "Aucun compte associé à cette adresse."}
-      else return {status : "ok","user" : user};
+      if (err) {
+        return {
+          error: "Aucun compte associé à cette adresse."
+        }
+      }
+      else {
+        console.log('user found');
+        console.log(res);
+        return {status : "ok","user" : user};
+      }
     });
     if (userX) {
       res.json({status: "logged", user : userX});
@@ -93,6 +105,7 @@ exports.tryToken = async (req, res) => {
 }
 
 exports.killSession = async (req, res) => {
+  res.set('Access-Control-Allow-Origin', req.headers.origin);
   if (req.session) {
     req.session.destroy();
     res.json({logged : false, user : []});

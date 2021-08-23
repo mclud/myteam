@@ -2,6 +2,8 @@ import history from '../History/History';
 
 let cookieCheck = true;
 //Verify if cookie exist and match a session in the cookiestore
+let myHeaders = new Headers();
+myHeaders.append('X-Custom-Header', 'ATM');
 export const getCookie = async () => {
     if (cookieCheck) {
         cookieCheck = false;

@@ -46,15 +46,22 @@ export default function Login() {
     let sendForm = async function() {
 
         if (!password.error && !mail.error) {
+            let datas = new URLSearchParams();
+            datas.append('email', mail.val.trim());
+            datas.append('pwd',password.val);
             let dataToSend = {
                 "email" : mail.val.trim(),
                 "pwd" : password.val,
             };
+            axios.defaults.withCredentials = true;
             let res = await axios({
                 method : "POST", 
                 url : process.env.REACT_APP_API_URL + '/login',
-                data : dataToSend,
+                data : datas,
                 withCredentials:  "true",
+                headers : {
+                    'Content-Type' : 'application/x-www-form-urlencoded'
+                }
             })
     
             if (res.status === 200) {

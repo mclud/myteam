@@ -21,10 +21,14 @@ db.once('open', function (){
     console.log("Connexion réussie."); 
 }); 
 
+// router.use(function(req, res, next) {
+//   res.set('Access-Control-Allow-Origin', req.headers.origin);
+//   next();
+// });
+
 router.get("/api", (req, res) => {
   res.send({ response: "I am alive" }).status(200);
 });
-
 //inscription
 router.route('/api/join')
   .post(createUser);
@@ -38,10 +42,6 @@ router.route('/api/cookie')
 router.route('/api/logout')
   .get(killSession);
 
-router.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
 
 module.exports = router;
 
