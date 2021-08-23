@@ -6,7 +6,7 @@ import Login from '../Login/Login'
 import { Grid, Box, Hidden } from "@material-ui/core";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import io from "socket.io-client";
+import io, { Socket } from "socket.io-client";
 import {getCookie} from '../Security/Cookie';
 import AppWraperSlice, { logged, selectAppWrap } from "./AppWraperSlice";
 import { connect, useDispatch } from "react-redux";
@@ -16,6 +16,7 @@ import NavLayer from "../NavLayer/NavLayer";
 import { bindActionCreators } from "redux";
 import history from "../History/History";
 import HomeSlider from "../HomeSlider/HomeSlider";
+import LiveChat from "../LiveChat/LiveChat";
 
 const socket = io('localhost:5000', {
     widthCredentials: true,
@@ -59,8 +60,6 @@ export function AppWraper() {
     const [cookieCheck, setCookieCheck] = useState(false);    
     const [customUser, setCustomUser] = useState();
     const [toggleMenu, setToggleMenu] = useState();
-    //IO
-    const [response, setResponse] = useState("");
 
     useEffect(() => {
         if (toggleMenu !== store.getState().navlayer.open) setToggleMenu(store.getState().navlayer.open);
@@ -86,18 +85,6 @@ export function AppWraper() {
                 setIsAuth(false) 
             }, 1500);
         }); 
-
-        //io
-        socket.on('FromAPI', (res) => {
-            console.log('USER CONNECTTTTTED');
-            socket.emit('userConnected', {data: ""});
-            setResponse(res.test)
-        });
-
-        socket.on('hello', (res) => {
-            console.log('hello retour');
-            console.log(res);
-        });
     });
 
     const classes = useStyles();
@@ -131,7 +118,6 @@ export function AppWraper() {
                         </Hidden>
                         <Grid item xs={12} md={8}>
                             Middle block
-                            <p>time is : {response}</p>
                         </Grid>
                         <Hidden only={['sm','xs']}>
                             <Grid item md={2}>
@@ -149,6 +135,9 @@ export function AppWraper() {
                 </Route>
                 <Route path="/join" component={CreateAccount} />
                 <Route path="/login" component={Login} />
+                <Route path="/live">
+                    <LiveChat socket={socket}></LiveChat>
+                </Route>
             </Switch>
             </div>
         }
@@ -157,6 +146,7 @@ export function AppWraper() {
         </Router>
     )
 }
+
 const mapStateToProps = (state) => ({
     appwrap: selectAppWrap(state),
   });

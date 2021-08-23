@@ -11,20 +11,31 @@ import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
 
 import "./HomeSlider.css";
-import JoinUs from '../../images/join.jpg'
+import JoinUs from '../../images/join.jpg';
+import MakeATeam from '../../images/team.jpg';
+import Fields from '../../images/terrains.jpg';
 // import Swiper core and required modules
 import SwiperCore, {Pagination,Navigation,Autoplay} from 'swiper/core';
 import { Button, makeStyles, withStyles } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 // install Swiper modules
 SwiperCore.use([Pagination,Navigation,Autoplay]);
 
 
 export default function HomeSlider() {
-
+const history = useHistory();
 const useStyles = makeStyles({
     joinus: {
         background: `url(${JoinUs}) no-repeat center`,
+        backgroundSize: 'cover',
+    },
+    team: {
+        background: `url(${MakeATeam}) no-repeat center`,
+        backgroundSize: 'cover',
+    },
+    fields: {
+        background: `url(${Fields}) no-repeat center`,
         backgroundSize: 'cover',
     },
 });
@@ -46,22 +57,28 @@ const StyledButton = withStyles({
     label: {
         textTransform: 'uppercase',
     },
-    })(Button);
+})(Button);
 
 const classes = useStyles();
 
   return (
     <>
-        <Swiper slidesPerView={1} spaceBetween={30} loop={true} pagination={{"clickable": true}} navigation={false} autoplay={{"delay": 300500,"disableOnInteraction": false}} className="mySwiper">
+        <Swiper slidesPerView={1} spaceBetween={30} loop={true} pagination={{"clickable": true}} navigation={false} autoplay={{"delay": 4000,"disableOnInteraction": false}} className="mySwiper">
             <SwiperSlide className={classes.joinus}>
                 <div>
                     <p>Are you ready to step your game up?</p>
                     <StyledButton>Join Us</StyledButton>
                 </div>
             </SwiperSlide>
-            <SwiperSlide><p>Create a team, and invite your friends to play!</p></SwiperSlide>
-            <SwiperSlide><p>Find a field, and see who's gonna play on it</p></SwiperSlide>
+            <SwiperSlide className={classes.team}><p>Create a team, and invite your friends to play!</p></SwiperSlide>
+            <SwiperSlide className={classes.fields}><p>Find a field, and see who's gonna play on it</p></SwiperSlide>
             <SwiperSlide><p>Schedule a game with your friends, and play against the world!</p></SwiperSlide>
+            <SwiperSlide className={classes.chat}>
+                <div>
+                    <p>Just chill and meet new people</p>
+                    <StyledButton onClick={() => history.push('/live')}>join the chat</StyledButton>
+                </div>
+            </SwiperSlide>
         </Swiper>
     </>
   )

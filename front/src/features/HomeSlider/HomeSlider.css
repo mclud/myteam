@@ -27,6 +27,10 @@
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
+
+    /* border: 1px solid white; */
+    /* border-radius: 44px; */
+    text-shadow: -1px -1px 0 grey, 1px -1px 0 grey, -1px 1px 0 grey, 1px 1px 0 grey;
   }
   
   .swiper-slide img {

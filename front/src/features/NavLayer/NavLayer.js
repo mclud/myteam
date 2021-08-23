@@ -7,12 +7,17 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
+import EventIcon from '@material-ui/icons/Event';
+import GpsFixedIcon from '@material-ui/icons/GpsFixed';
+import NoteIcon from '@material-ui/icons/Note';
+import StoreIcon from '@material-ui/icons/Store';
+import ChatIcon from '@material-ui/icons/Chat';
 import store from '../../app/store';
 import { connect, useDispatch } from 'react-redux';
 import NavLayerSlice, { selectNavLayer, toggle } from './NavLayerSlice';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   list: {
@@ -33,10 +38,7 @@ export function NavLayer(props) {
     bottom: false,
     right: false,
   });
-  console.log('props:', props);
-
-
-
+  
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -54,21 +56,37 @@ export function NavLayer(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+
+          <ListItem button key="Home">
+            <ListItemIcon><HomeIcon></HomeIcon></ListItemIcon>
+            <Link to="/"><ListItemText primary={"Home"} /></Link>
           </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+          <ListItem button key="News">
+            <ListItemIcon><NoteIcon></NoteIcon></ListItemIcon>
+            <ListItemText primary={"News"} />
           </ListItem>
-        ))}
+          <ListItem button key="Chat">
+            <ListItemIcon><ChatIcon></ChatIcon></ListItemIcon>
+            <Link to="/live"><ListItemText primary={"Chat"}></ListItemText></Link>
+          </ListItem>
+          <ListItem button key="Events">
+            <ListItemIcon><EventIcon></EventIcon></ListItemIcon>
+            <ListItemText primary={"Events"} />
+          </ListItem>
+          <ListItem button key="Fields">
+            <ListItemIcon><GpsFixedIcon></GpsFixedIcon></ListItemIcon>
+            <ListItemText primary={"Fields"} />
+          </ListItem>
+          <Divider/>
+          <ListItem button key="Shop" disabled>
+            <ListItemIcon><StoreIcon></StoreIcon></ListItemIcon>
+            <Link to="/shop"><ListItemText primary="Shop"></ListItemText></Link>
+          </ListItem>
+          <Divider></Divider>
+          <ListItem button key="About us">
+            <ListItemIcon><NoteIcon></NoteIcon></ListItemIcon>
+            <ListItemText primary={"About us"} />
+          </ListItem>
       </List>
     </div>
   );

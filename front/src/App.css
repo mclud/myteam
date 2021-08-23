@@ -16,6 +16,12 @@
   font-family: 'coolvetica';
   font-size: 2rem;
 }
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: unset;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

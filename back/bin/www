@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 
-console.log('here');
 
 var app = require('../app');
 var debug = require('debug')('api:server');
@@ -27,7 +26,7 @@ const server = http.createServer(app);
  */
 
 server.listen(port,8080, () => {
-  console.log('listening on pogfhfghrt :', port);
+  console.log('listening on port :', port);
 });
 
 const io = require("socket.io")(
@@ -39,12 +38,19 @@ const io = require("socket.io")(
     allowedHeaders: ["ioteam"],
   }}
   );
- 
+  io.on("connection", (socket) => {
+    socket.on('userAddedMessage', (res) => {
+      socket.broadcast.emit('refreshList', res);
+    })
+  });
  io.on("connect_error", (err) => {
   console.log(`connect_error due to ${err.message}`);
 
  io.on('userConnected', (socket) => {
    socket.emit('userON', {msg: "Utilisateur connecté"});
+ })
+ io.on('newMsgFromChat', (socket) => {
+   socket.emit('newMsgFromSrv', { data : "test"});
  })
 });
 
