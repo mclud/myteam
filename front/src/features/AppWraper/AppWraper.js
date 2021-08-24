@@ -18,7 +18,10 @@ import history from "../History/History";
 import HomeSlider from "../HomeSlider/HomeSlider";
 import LiveChat from "../LiveChat/LiveChat";
 
-const socket = io('localhost:5000', {
+export const API_URL = (process.env.NODE_ENV === "production") ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
+export const ioURL = (process.env.NODE_ENV === "production") ? process.env.REACT_APP_IO_URL_PROD : process.env.REACT_APP_IO_URL_DEV;
+
+const socket = io(ioURL, {
     widthCredentials: true,
     extraHeader: {
         "ioteam": 'myTeamIO',

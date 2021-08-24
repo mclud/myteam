@@ -17,7 +17,7 @@ const normalizeUserId = async (email) => {
 }
 
 exports.createUser = async (req, res) => {
-  console.log('here', req.body);
+
   if (req.body !== undefined 
     && Object.keys(req.body).length === 3
     && req.body.username !== undefined && req.body.username.length > 3
@@ -69,7 +69,6 @@ exports.userLogin = async (req, res) => {
     if (comparePwd) {
       req.session.isAuth = true;
       req.session.user = user;
-      console.log('SESSION: ', req.session, req.sessionID);
       res.json({msg: "Connected", user: user, cookie: req.sessionID});
     } else res.json({error:'wrongPwd'});
   } else {
@@ -87,8 +86,7 @@ exports.tryToken = async (req, res) => {
         }
       }
       else {
-        console.log('user found');
-        console.log(res);
+        //user found
         return {status : "ok","user" : user};
       }
     });

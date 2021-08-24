@@ -1,4 +1,5 @@
 import history from '../History/History';
+import {API_URL} from '../AppWraper/AppWraper';
 
 let cookieCheck = true;
 //Verify if cookie exist and match a session in the cookiestore
@@ -7,7 +8,7 @@ myHeaders.append('X-Custom-Header', 'ATM');
 export const getCookie = async () => {
     if (cookieCheck) {
         cookieCheck = false;
-        let response = await fetch(process.env.REACT_APP_API_URL + '/cookie', {
+        let response = await fetch(API_URL + '/cookie', {
             credentials : "include",
         }).then(res => res.json())
         
@@ -23,7 +24,7 @@ export const getCookie = async () => {
 }
 
 export const logOut = async () => {
-    let response = await fetch(process.env.REACT_APP_API_URL + '/logout', {
+    let response = await fetch(API_URL + '/logout', {
         method: 'GET',
         credentials : "include"
     }).then(res => res);

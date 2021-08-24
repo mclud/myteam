@@ -7,6 +7,7 @@ import { valid, invalid, origin } from '../AlertMsg/AlertMsgSlice';
 import { logged } from '../AppWraper/AppWraperSlice';
 import { useHistory } from "react-router-dom";
 import { saniMail, saniPwd } from '../Security/Cookie';
+import { API_URL } from '../AppWraper/AppWraper';
 
 
 
@@ -56,7 +57,7 @@ export default function Login() {
             axios.defaults.withCredentials = true;
             let res = await axios({
                 method : "POST", 
-                url : process.env.REACT_APP_API_URL + '/login',
+                url : API_URL + '/login',
                 data : datas,
                 withCredentials:  "true",
                 headers : {
