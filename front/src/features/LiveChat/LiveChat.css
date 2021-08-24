@@ -1,7 +1,11 @@
+
+
 .chat-window {
     background: grey;
     padding: 10px;
     height: 450px;
+    font-family: 'Timeless';
+    font-size:1.1rem;
 }
 .chat-dialog, .chats-users, .chat-sendmsg {
     background: #fff;
@@ -23,11 +27,14 @@
     bottom:0;
     padding: 5px;
 }
-.chats-users {
-
+.chat-msg-user {
+    text-align: left;
+    padding-left: 20px;
 }
 .chat-msgs {
     padding-bottom: 50px;
+    max-height: calc(100% - 50px);
+    overflow-y: auto;
 }
 .chat-msg {
     display: flex;
@@ -43,4 +50,17 @@
     height: 100%;
     width:95%;
     padding: 5px;
+}
+.chat-user {
+    padding: 7px
+}
+.status-admin {
+    color: red;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 800px) {
+    .chat-window {
+        font-size: 0.8rem;
+    }
 }

@@ -9,6 +9,11 @@
     src: local("coolvetica"),
      url("./fonts/coolvetica/coolvetica.ttf") format("truetype");
     }
+    @font-face {
+      font-family: "Timeless";
+      src: local("timeless"),
+       url("./fonts/timeless/Timeless.ttf") format("truetype");
+      }
 
 body {
   margin: 0;

@@ -26,6 +26,9 @@ const useStyles = makeStyles({
   fullList: {
     width: 'auto',
   },
+  links : {
+    color: '#000'
+  }
 });
 
 export function NavLayer(props) {
@@ -57,35 +60,41 @@ export function NavLayer(props) {
     >
       <List>
 
-          <ListItem button key="Home">
-            <ListItemIcon><HomeIcon></HomeIcon></ListItemIcon>
-            <Link to="/"><ListItemText primary={"Home"} /></Link>
-          </ListItem>
+          <Link to="/">
+            <ListItem button key="Home">
+              <ListItemIcon><HomeIcon></HomeIcon></ListItemIcon>
+              <ListItemText primary={"Home"} />
+            </ListItem>
+          </Link>
           <ListItem button key="News">
             <ListItemIcon><NoteIcon></NoteIcon></ListItemIcon>
-            <ListItemText primary={"News"} />
+            <ListItemText className={classes.links} primary={"News"} />
           </ListItem>
-          <ListItem button key="Chat">
-            <ListItemIcon><ChatIcon></ChatIcon></ListItemIcon>
-            <Link to="/live"><ListItemText primary={"Chat"}></ListItemText></Link>
-          </ListItem>
+          <Link to="/live">
+            <ListItem button key="Chat">
+              <ListItemIcon><ChatIcon></ChatIcon></ListItemIcon>
+              <ListItemText className={classes.links} primary={"Chat"}></ListItemText>
+            </ListItem>
+          </Link>
           <ListItem button key="Events">
             <ListItemIcon><EventIcon></EventIcon></ListItemIcon>
-            <ListItemText primary={"Events"} />
+            <ListItemText className={classes.links} primary={"Events"} />
           </ListItem>
           <ListItem button key="Fields">
             <ListItemIcon><GpsFixedIcon></GpsFixedIcon></ListItemIcon>
-            <ListItemText primary={"Fields"} />
+            <ListItemText className={classes.links} primary={"Fields"} />
           </ListItem>
           <Divider/>
-          <ListItem button key="Shop" disabled>
-            <ListItemIcon><StoreIcon></StoreIcon></ListItemIcon>
-            <Link to="/shop"><ListItemText primary="Shop"></ListItemText></Link>
-          </ListItem>
+          <Link to="/shop">
+            <ListItem button key="Shop" disabled>
+              <ListItemIcon><StoreIcon></StoreIcon></ListItemIcon>
+              <ListItemText className={classes.links} primary="Shop"></ListItemText>
+            </ListItem>
+          </Link>
           <Divider></Divider>
           <ListItem button key="About us">
             <ListItemIcon><NoteIcon></NoteIcon></ListItemIcon>
-            <ListItemText primary={"About us"} />
+            <ListItemText className={classes.links} primary={"About us"} />
           </ListItem>
       </List>
     </div>

@@ -41,14 +41,17 @@ const io = require("socket.io")(
   io.on("connection", (socket) => {
     socket.on('userAddedMessage', (res) => {
       socket.broadcast.emit('refreshList', res);
-    })
+    });
+    socket.on('toctoc', (res) => {
+      socket.local.emit('WHOAREYOU');
+    });
+    socket.on('IAM', (user) => {
+      socket.local.emit('addUserOn', user);
+    });
   });
  io.on("connect_error", (err) => {
   console.log(`connect_error due to ${err.message}`);
 
- io.on('userConnected', (socket) => {
-   socket.emit('userON', {msg: "Utilisateur connecté"});
- })
  io.on('newMsgFromChat', (socket) => {
    socket.emit('newMsgFromSrv', { data : "test"});
  })

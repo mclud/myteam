@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './fonts/duck/Ducks.ttf';
 import './fonts/coolvetica/coolvetica.ttf';
+import './fonts/timeless/Timeless.ttf';
+import './fonts/timeless/Timeless-Bold.ttf';
 
 ReactDOM.render(
   <React.Fragment>

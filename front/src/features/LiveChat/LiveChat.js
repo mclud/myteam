@@ -6,6 +6,10 @@ import SendIcon from '@material-ui/icons/Send';
 
 const LiveChat = (props) => {
     const socket = props.socket;
+    const [usersOn, setUsersOn] = useState([{
+        status : 'admin', 
+        userName : 'Admin'
+    }]);
     //msg user is sending
     const [msg, setMsg] = useState({
         user: "",
@@ -30,10 +34,11 @@ const LiveChat = (props) => {
         if (e.target.value !== msg.text) {
             setMsg({
                 user : store.getState().appwrap.user.userName,
-                text : e.target.value
+                text : e.target.value,
             });
         }
     }
+
 
     const sendMsgHandler = () => {
         if (msg.text.length) {
@@ -46,6 +51,15 @@ const LiveChat = (props) => {
     useEffect(() => {
         socket.on('refreshList', (msg) => {
             setMsgFromSrv(msg);
+        });
+        socket.emit('toctoc');
+        socket.on('WHOAREYOU', (res) => {
+            socket.emit('IAM', {userName : store.getState().appwrap.user.userName, status: store.getState().appwrap.user.status});
+        });
+        socket.on('addUserOn', (user) => {
+            if (usersOn.filter(e=> e.userName === user.userName).length === 0) {
+                setUsersOn([...usersOn, {...user}])
+            }
         });
     }, []);
 
@@ -65,7 +79,7 @@ const LiveChat = (props) => {
                     {chatMsgs.map((msg, i) => {
                         return (
                         <Grid item className="chat-msg" key={i}>
-                            <Grid item xs={2} className="chat-msg-user">{msg.user}</Grid>
+                            <Grid item xs={4} md={2} className="chat-msg-user">{msg.user}</Grid>
                             <Grid item xs={10} className="chat-msg-text">{msg.text}</Grid>
                         </Grid>
                         )
@@ -77,7 +91,13 @@ const LiveChat = (props) => {
                     </Grid>
                 </Grid>
                 <Grid item className="chats-users" xs={2}>
-                    Users
+                    {usersOn.map((user, i) => {
+                        return (
+                            <Grid item xs={12} key={i}>
+                                <div className={"chat-user status-" + user.status}>{user.userName}</div>
+                            </Grid>
+                        )
+                    })}
                 </Grid>
             </Box>
         : 
