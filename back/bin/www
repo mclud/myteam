@@ -33,7 +33,7 @@ const io = require("socket.io")(
   server, 
   { 
   cors: {    
-    origin: "http://localhost:3000",    
+    origin: "http://localhost:3000",     //comment this line for prod
     methods: ["GET", "POST"],
     allowedHeaders: ["ioteam"],
   }}

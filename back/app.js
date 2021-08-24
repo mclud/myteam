@@ -22,31 +22,34 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Credentials', true);
   next();
 });
-// var allowedOrigins = ['http://localhost:3000',
-//                       'https://localhost:3000',
-//                       'http://185.98.137.145',
-//                       'https://185.98.137.145',
-//                       'http://www.1shot.fr',
-//                       'https://www.1shot.fr',
-//                       'http://1shot.fr',
-//                       'https://1shot.fr',
-//                     ];
 
-// app.use(cors({
-//   origin: function(origin, callback){
-//     // allow requests with no origin
-//     // (like mobile apps or curl requests)
-//     if(!origin)
-//       return callback(null, true);
-//     if(allowedOrigins.indexOf(origin) === -1){
-//       var msg = 'The CORS policy for this site does not ' +
-//           'allow access from the specified Origin.';
-//       return callback(new Error(msg), false);
-//     }
-//     return callback(null, true);
-//   }
-// }));
+if (process.env.NODE_ENV === "production") {
+  
+    var allowedOrigins = ['http://localhost:3000',
+    'https://localhost:3000',
+    'http://185.98.137.145',
+    'https://185.98.137.145',
+    'http://www.1shot.fr',
+    'https://www.1shot.fr',
+    'http://1shot.fr',
+    'https://1shot.fr',
+  ];
 
+  app.use(cors({
+  origin: function(origin, callback){
+  // allow requests with no origin
+  // (like mobile apps or curl requests)
+  if(!origin)
+  return callback(null, true);
+  if(allowedOrigins.indexOf(origin) === -1){
+  var msg = 'The CORS policy for this site does not ' +
+  'allow access from the specified Origin.';
+  return callback(new Error(msg), false);
+  }
+  return callback(null, true);
+  }
+  }));
+}
 app.use(cors(corsOptions));
 
 app.use(helmet());
