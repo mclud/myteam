@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose'); 
+const { createField, getFields } = require('../Controllers/Fields/Fields');
 const { createUser, userLogin, tryToken, killSession } = require('../Controllers/User/User');
 
 //DB PARAMS
@@ -42,6 +43,12 @@ router.route('/api/cookie')
 router.route('/api/logout')
   .get(killSession);
 
+
+router.route('/api/addfield')
+  .post(createField);
+
+router.route('/api/getfields')
+  .get(getFields);
 
 module.exports = router;
 

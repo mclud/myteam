@@ -23,8 +23,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-if (process.env.NODE_ENV === "production") {
-  
+if (process.env.NODE_ENV === "production") {  
     var allowedOrigins = ['http://localhost:3000',
     'https://localhost:3000',
     'http://185.98.137.145',

@@ -67,7 +67,7 @@ const classes = useStyles();
             <SwiperSlide className={classes.joinus}>
                 <div>
                     <p>Are you ready to step your game up?</p>
-                    <StyledButton>Join Us</StyledButton>
+                    <StyledButton onClick={() => history.push('/join')}>Join Us</StyledButton>
                 </div>
             </SwiperSlide>
             <SwiperSlide className={classes.team}><p>Create a team, and invite your friends to play!</p></SwiperSlide>

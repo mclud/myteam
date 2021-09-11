@@ -104,7 +104,7 @@ export default function Login() {
         <div className="form-user">
             <TextField inputProps={{pattern : "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"}} className={classes.root} helperText={mail.errorTxt} error={mail.error} id="email" value={mail.val} label="Adresse E-mail" variant="outlined" onChange={e => setMail(saniMail(e))}>Adresse e-mail</TextField>
             <TextField className={classes.root} type="password" helperText={password.errorTxt} error={password.error} id="pwd" label="Password" value={password.val} variant="outlined" onChange={e => setPassword(saniPwd(e))} >Password</TextField>
-            <Button className={classes.btn}variant="contained" color="primary" onClick={sendForm}>Se connecter</Button>
+            <Button className={classes.btn} variant="contained" color="primary" onClick={sendForm}>Se connecter</Button>
         </div>
     )
 }

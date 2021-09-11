@@ -80,10 +80,12 @@ export function NavLayer(props) {
             <ListItemIcon><EventIcon></EventIcon></ListItemIcon>
             <ListItemText className={classes.links} primary={"Events"} />
           </ListItem>
-          <ListItem button key="Fields">
-            <ListItemIcon><GpsFixedIcon></GpsFixedIcon></ListItemIcon>
-            <ListItemText className={classes.links} primary={"Fields"} />
-          </ListItem>
+          <Link to="/fields">
+            <ListItem button key="Fields">
+              <ListItemIcon><GpsFixedIcon></GpsFixedIcon></ListItemIcon>
+              <ListItemText className={classes.links} primary={"Fields"} />
+            </ListItem>
+          </Link>
           <Divider/>
           <Link to="/shop">
             <ListItem button key="Shop" disabled>

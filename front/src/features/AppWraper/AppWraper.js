@@ -17,6 +17,7 @@ import { bindActionCreators } from "redux";
 import history from "../History/History";
 import HomeSlider from "../HomeSlider/HomeSlider";
 import LiveChat from "../LiveChat/LiveChat";
+import MapG from "../Map/Map";
 
 export const API_URL = (process.env.NODE_ENV === "production") ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
 export const ioURL = (process.env.NODE_ENV === "production") ? process.env.REACT_APP_IO_URL_PROD : process.env.REACT_APP_IO_URL_DEV;
@@ -131,14 +132,12 @@ export function AppWraper() {
                 </Grid>
                 </Route>
 
-                <Route path="/fields">
-                    <div>
-                        Terrains/...
-                    </div>
+                <Route path="/fields" component={MapG} >
+
                 </Route>
                 <Route path="/join" component={CreateAccount} />
                 <Route path="/login" component={Login} />
-                <Route path="/live">
+                <Route path="/live" >
                     <LiveChat socket={socket}></LiveChat>
                 </Route>
             </Switch>

@@ -1,0 +1,28 @@
+.leaflet-container {
+    height: 450px;
+    width: 100%;
+}
+.fields {
+    width: 800px;
+    margin: 25px auto;
+}
+.gen-fields {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.add-field {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.add-field button {
+    margin-top: 10px;
+}
+@media screen and (max-width: 500px) {
+    .fields {
+        width: 100%;
+    }
+}
