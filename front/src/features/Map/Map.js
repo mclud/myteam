@@ -23,7 +23,8 @@ L.Marker.prototype.options.icon = DefaultIcon;
 const MapG = () => {
     const mediaQueryList = window.matchMedia("only screen and (max-width: 600px)");
     const dispatch = useDispatch();
-
+    
+    const [ready, setReady] = useState(false)
     const [coordX, setCoordX] = useState({val : ""});
     const [coordY, setCoordY] = useState({val : ""});
     const [fields, setFields] = useState([]);
@@ -125,6 +126,8 @@ const MapG = () => {
             });
         } 
     }, []);
+
+    useEffect(() => { setReady(true) }, []);
 
     return(
         <div className="gen-fields">
