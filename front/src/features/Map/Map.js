@@ -1,4 +1,4 @@
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
 import L from 'leaflet';
 import "./Map.css"
@@ -150,7 +150,7 @@ const MapG = () => {
             }
             <div className="fields">
                 {ready ? 
-                    <Map center={[48.552019, 2.409512]} zoom={12} scrollWheelZoom={false}>
+                    <MapContainer center={[48.552019, 2.409512]} zoom={12} scrollWheelZoom={false}>
                         <TileLayer
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"                        />
@@ -164,7 +164,7 @@ const MapG = () => {
                                 </Popup>
                             </Marker>   
                         ))}          
-                    </Map>
+                    </MapContainer>
                 :
                 null
                 }
