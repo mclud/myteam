@@ -149,22 +149,25 @@ const MapG = () => {
             null
             }
             <div className="fields">
-                <Map center={[48.552019, 2.409512]} zoom={12} scrollWheelZoom={false}>
-                <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+                {ready ? 
+                    <Map center={[48.552019, 2.409512]} zoom={12} scrollWheelZoom={false}>
+                        <TileLayer
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"                        />
 
-                {fields.map((field, i) => (
-                    <Marker key={i} position={[field.fieldCoordY, field.fieldCoordX]}>
-                        <Popup>
-                            Name : {field.fieldName} <br/>
-                            Sports : {field.sportsAvailable} <br />
-                            Adress : {field.fieldAdr}
-                        </Popup>
-                    </Marker>   
-                ))}          
-                </Map>
+                        {fields.map((field, i) => (
+                            <Marker key={i} position={[field.fieldCoordY, field.fieldCoordX]}>
+                                <Popup>
+                                    Name : {field.fieldName} <br/>
+                                    Sports : {field.sportsAvailable} <br />
+                                    Adress : {field.fieldAdr}
+                                </Popup>
+                            </Marker>   
+                        ))}          
+                    </Map>
+                :
+                null
+                }
             </div>
         </div>
 
