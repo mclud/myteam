@@ -25,6 +25,8 @@ const { REACT_APP_ENV } = process.env;
 export const API_URL = (REACT_APP_ENV === "production") ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
 export const ioURL = (REACT_APP_ENV === "production") ? process.env.REACT_APP_IO_URL_PROD : process.env.REACT_APP_IO_URL_DEV;
 
+console.log('API URL = ', API_URL);
+
 const socket = io(ioURL, {
     widthCredentials: true,
     extraHeader: {
