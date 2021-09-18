@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-const { db } = require('../../models/User');
 const User = require('../../models/User');
 
 const normalizeUserId = async (email) => {
