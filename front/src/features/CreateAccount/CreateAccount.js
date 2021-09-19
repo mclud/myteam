@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import { useDispatch } from "react-redux";
 import { valid, invalid, origin } from "../AlertMsg/AlertMsgSlice";
 import { logged } from '../AppWraper/AppWraperSlice';
 import axios from "axios";
+import store from "../../app/store"
 import './CreateAccount.css';
 import { useHistory } from 'react-router';
 
@@ -64,9 +65,9 @@ export default function CreateAccount() {
     let checkPwd = (e) => {
         let value = e.target.value.toString();
         if (value.length > 6) {
-            if (value === "test") setPassword({error : true, errorTxt : "Username should have more than 4 chars", val : value})
+            if (value === "test") setPassword({error : true, errorTxt : "Password should have more than 4 chars", val : value})
             else setPassword({error : false, errorTxt : "", val : value});
-        } else setPassword({error : false, errorTxt : "Username should have more than 4 chars", val : value})
+        } else setPassword({error : false, errorTxt : "Password should have more than 4 chars", val : value})
     }
 
     let sendForm = async function() {
@@ -112,10 +113,16 @@ export default function CreateAccount() {
 
     return (
         <div className="form-user">
-            <TextField className={classes.root} helperText={username.errorTxt} error={username.error} id="username" value={username.val} label="Username" variant="outlined" onChange={e => checkUsername(e)}>Username</TextField>
-            <TextField inputProps={{pattern : "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"}} className={classes.root} helperText={mail.errorTxt} error={mail.error} id="email" value={mail.val} label="Adresse E-mail" variant="outlined" onChange={e => checkMail(e)}>Adresse e-mail</TextField>
-            <TextField className={classes.root} type="password" helperText={password.errorTxt} error={password.error} id="pwd" label="Password" value={password.val} variant="outlined" onChange={e => checkPwd(e)} >Password</TextField>
-            <Button className={classes.btn}variant="contained" color="primary" onClick={sendForm}>Join Us</Button>
+            {store.getState().appwrap.logged ? 
+            <div>You already have an account..</div>
+            :
+            <div>
+                <TextField className={classes.root} helperText={username.errorTxt} error={username.error} id="username" value={username.val} label="Username" variant="outlined" onChange={e => checkUsername(e)}>Username</TextField>
+                <TextField inputProps={{pattern : "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"}} className={classes.root} helperText={mail.errorTxt} error={mail.error} id="email" value={mail.val} label="Adresse E-mail" variant="outlined" onChange={e => checkMail(e)}>Adresse e-mail</TextField>
+                <TextField className={classes.root} type="password" helperText={password.errorTxt} error={password.error} id="pwd" label="Password" value={password.val} variant="outlined" onChange={e => checkPwd(e)} >Password</TextField>
+                <Button className={classes.btn}variant="contained" color="primary" onClick={sendForm}>Join Us</Button>
+            </div>
+            }
         </div>
     )
 }

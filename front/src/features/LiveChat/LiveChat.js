@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import store from '../../app/store'
 import './LiveChat.css';
 import SendIcon from '@material-ui/icons/Send';
+import { Link } from "react-router-dom";
 
 const LiveChat = (props) => {
     const socket = props.socket;
@@ -102,7 +103,7 @@ const LiveChat = (props) => {
             </Box>
         : 
             <div className="unauth-chat">
-                You need to login to acces the chat.
+                You need to <Link to="/login">login</Link> to acces the chat.
             </div>
         
         }

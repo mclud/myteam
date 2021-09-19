@@ -30,11 +30,13 @@
 .chat-msg-user {
     text-align: left;
     padding-left: 20px;
+    color: black;
 }
 .chat-msgs {
     padding-bottom: 50px;
     max-height: calc(100% - 50px);
     overflow-y: auto;
+    color: black;
 }
 .chat-msg {
     display: flex;
@@ -52,11 +54,18 @@
     padding: 5px;
 }
 .chat-user {
-    padding: 7px
+    padding: 7px;
+    color: black;
 }
 .status-admin {
     color: red;
     font-weight: 700;
+}
+.unauth-chat {
+    margin: 25px auto;
+}
+.unauth-chat a {
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 800px) {

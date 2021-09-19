@@ -21,6 +21,7 @@
 .add-field button {
     margin-top: 10px;
 }
+
 @media screen and (max-width: 500px) {
     .fields {
         width: 100%;

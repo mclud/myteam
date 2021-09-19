@@ -18,8 +18,10 @@ import history from "../History/History";
 import HomeSlider from "../HomeSlider/HomeSlider";
 import LiveChat from "../LiveChat/LiveChat";
 import MapG from "../Map/Map";
+import GetStarted from "../GetStarted/GetStarted";
+import MyAccount from "../MyAccount/MyAccount";
+import Bottom from "../Bottom/Bottom";
 
-const { REACT_APP_API_URL_PROD } = process.env;
 const { REACT_APP_ENV } = process.env;
 
 export const API_URL = (REACT_APP_ENV === "production") ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
@@ -111,41 +113,22 @@ export function AppWraper() {
             </div>
             : 
             <div>
-            <NavBar />
-            <NavLayer />
-            <AlertMsg></AlertMsg> 
-            <HomeSlider />
-            <Switch>
-                <Route exact path="/">
-                <Grid>
-                    <Box display="flex" xs={12}>
-                    {/* aside left */}
-                        <Hidden only={['sm','xs']}>
-                            <Grid item md={2}>
-                                Left block
-                            </Grid>
-                        </Hidden>
-                        <Grid item xs={12} md={8}>
-                            Middle block
-                        </Grid>
-                        <Hidden only={['sm','xs']}>
-                            <Grid item md={2}>
-                                Right block
-                            </Grid>
-                        </Hidden>
-                    </Box>
-                </Grid>
-                </Route>
+                <NavBar />
+                <NavLayer />
+                <AlertMsg></AlertMsg> 
+                <HomeSlider />
+                <Switch>
+                    <Route exact path="/" component={GetStarted} />
+                    <Route path="/myaccount" component={MyAccount} />
 
-                <Route path="/fields" component={MapG} >
-
-                </Route>
-                <Route path="/join" component={CreateAccount} />
-                <Route path="/login" component={Login} />
-                <Route path="/live" >
-                    <LiveChat socket={socket}></LiveChat>
-                </Route>
-            </Switch>
+                    <Route path="/fields" component={MapG} />
+                    <Route path="/join" component={CreateAccount} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/live" >
+                        <LiveChat socket={socket}></LiveChat>
+                    </Route>
+                </Switch>
+                <Bottom/>
             </div>
         }
 

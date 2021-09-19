@@ -124,7 +124,7 @@ export function NavBar(props) {
                 <div>
                 <MenuItem disabled>{store.getState().appwrap.user.userName}</MenuItem>
                   <Divider />
-                  <MenuItem onClick={handleClose}><Link to="">My account</Link></MenuItem>
+                  <MenuItem onClick={handleClose}><Link to="/myaccount">My account</Link></MenuItem>
                   <MenuItem onClick={handleClose}>My team</MenuItem>
                   <MenuItem onClick={handleClose}>My friends</MenuItem>
                   <MenuItem onClick={handleClose}>Last activitys</MenuItem>
