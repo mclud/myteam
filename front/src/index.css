@@ -14,6 +14,11 @@
       src: local("timeless"),
        url("./fonts/timeless/Timeless.ttf") format("truetype");
       }
+    @font-face {
+      font-family: "Lemon";
+      src: local("lemon"),
+        url("./fonts/lemon/LEMONMILK-Regular.otf") format("truetype");
+      }
 
 body {
   background: #222629;

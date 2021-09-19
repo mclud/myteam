@@ -2,16 +2,21 @@
     background-color: #222629;
     color: white;
     padding: 25px;
-    font-family: 'coolvetica';
+    font-family: 'Lemon'!important;
     letter-spacing: 2px;
     border-bottom: 1px solid white;
 }
+.getstarted a:visited {
+    color: white!important;
+}
 .section-title {
     text-transform: uppercase;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 .getstarted-body {
+    font-family: "Lemon";
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     max-width: 100%;
@@ -20,7 +25,7 @@
     padding: 20px 0;
 }
 .getstarted-body > div {
-    width: 50%;
+    width: 100%;
 }
 .gets-left, .gets-right {
     display: flex;
@@ -28,20 +33,28 @@
 }
 .gets-right {
     color: #222629;
+    display: flex;
 }
-ul {
+.getstarted-body ul {
     list-style: none!important;
+    margin: auto;
+    padding: 0;
+    display:flex;
+}
+ul li {
+    margin: 15px 50px;
 }
 .free-acc {
     background: #222629;
     color: white;
-    border-radius: 50%;
-    width: 170px;
-    height: 170px;
-    padding: 10px;
+    /* border-radius: 50%; */
+    /* width: 170px; */
+    /* height: 170px; */
+    padding: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 20px 0 30px;
 }
 .free-acc b {
     margin: 0 5px;

@@ -10,9 +10,9 @@ const GetStarted = () => {
             </div>
             <div className="getstarted-body">
                 <div className="gets-left">
-                    <ul>
-                        <li className="free-acc"><Link to="/join">Create a <b>FREE</b> account</Link></li>
-                    </ul>
+                    <div className="free-acc">
+                        <Link to="/join">Create a <b>FREE</b> account</Link>
+                    </div>
                 </div>
                 <div className="gets-right">
                     <ul>
